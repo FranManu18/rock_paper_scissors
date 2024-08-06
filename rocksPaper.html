@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rocks,Paper,Scissors</title>
+  </head>
+  <body>
+    <h1>Rocks,Paper,Scissors</h1>
+    <script>
+      let humanScore = 0,
+        computerScore = 0;
+
+      const getComputerChoice = () => {
+        return Math.floor(Math.random() * 3);
+      };
+
+      const getHumanChoice = () => {
+        let choice = prompt("Rock,Paper or Scissor?");
+        let numberChoice;
+        choice = choice.toLowerCase();
+        if (choice === "rock") {
+          numberChoice = 0;
+        } else if (choice === "paper") {
+          numberChoice = 1;
+        } else if (choice === "scissor") {
+          numberChoice = 2;
+        }
+        return !isNaN(numberChoice)
+          ? numberChoice
+          : "No se ingreso una opcion valida";
+      };
+
+      const playRound = (human, computer, scoreHuman, scoreComputer) => {
+        switch (true) {
+          case isNaN(human):
+            alert("Perdiste, por no poner una opción válida");
+            scoreComputer++;
+            break;
+          case human === computer:
+            alert("Empate, ambos eligieron lo mismo");
+            break;
+          case human == 0 && computer == 2:
+            alert("Ganaste, la piedra le gana a las tijeras");
+            scoreHuman++;
+            break;
+          case human == 2 && computer == 0:
+            alert("Perdiste, la piedra le gana a las tijeras");
+            scoreComputer++;
+            break;
+          case human == 0 && computer == 1:
+            alert("Perdiste, el papel le gana a la piedra");
+            scoreComputer++;
+            break;
+          case human == 1 && computer == 0:
+            alert("Ganaste, el papel le gana a la piedra");
+            scoreHuman++;
+            break;
+          case human == 1 && computer == 2:
+            alert("Perdiste, las tijeras le ganan al papel");
+            scoreComputer++;
+            break;
+          case human == 2 && computer == 1:
+            alert("Ganaste, las tijeras le ganan al papel");
+            scoreHuman++;
+            break;
+        }
+      };
+
+      const playGame = () => {
+        let humanScore = 0,
+          computerScore = 0;
+
+        let humanSelection = 0,
+          computerSelection = 0;
+
+        for (let i = 0; i < 5; i++) {
+          humanSelection = getHumanChoice();
+          computerSelection = getComputerChoice();
+          console.log(humanSelection, computerSelection);
+          playRound(
+            humanSelection,
+            computerSelection,
+            humanScore,
+            computerScore
+          );
+        }
+
+        if (humanScore > computerScore) {
+          alert("El ganador fuiste tu");
+        } else if (humanScore < computerScore) {
+          alert("El ganador fue el robot");
+        } else {
+          alert("Empataron!");
+        }
+      };
+      playGame();
+    </script>
+  </body>
+</html>
